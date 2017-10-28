@@ -9,8 +9,8 @@ defmodule RingChain do
   Starts a new chain composed of n rings
   and returns `{:ok, first_ring_pid}`.
   """
-  def start(nodes) do
-    Master.start(nodes)
+  def start(nodes \\ 5, node_module \\ Node) do
+    Master.start(nodes, node_module)
   end
 
   @doc """
@@ -19,5 +19,11 @@ defmodule RingChain do
   """
   def stop(pid) do
     Node.stop(pid)
+  end
+
+  def fibonacci(1), do: 1
+  def fibonacci(2), do: 1
+  def fibonacci(n) when n > 0 do
+    fibonacci(n - 1) + fibonacci(n - 2)
   end
 end
