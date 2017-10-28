@@ -3,16 +3,21 @@ defmodule RingChain do
   Documentation for RingChain.
   """
 
+  alias RingChain.{Master,Node}
+
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> RingChain.hello
-      :world
-
+  Starts a new chain composed of n rings
+  and returns `{:ok, first_ring_pid}`.
   """
-  def hello do
-    :world
+  def start(nodes) do
+    Master.start(nodes)
+  end
+
+  @doc """
+  Stops a given ring of the chain and
+  subsequently stop the whole chain.
+  """
+  def stop(pid) do
+    Node.stop(pid)
   end
 end

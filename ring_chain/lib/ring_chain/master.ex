@@ -10,18 +10,22 @@ defmodule RingChain.Master do
       |> Enum.to_list()
       |> List.foldl(first, fn(x, previous) ->
         {:ok, current} = Node.start(x)
-        send previous, {:set_next, current}
+        # send previous, {:set_next, current}
+        Node.set_next(previous, current)
         current
       end)
 
-    send last, {:set_next, first}
+    # send last, {:set_next, first}
+    Node.set_next(last, first)
 
-    send first, {:increment, 0}
+    # send first, {:increment, 0}
+    Node.increment(first, 0)
 
-    first
+    {:ok, first}
   end
 
   def stop(pid) do
-    send pid, :stop
+    # send pid, :stop
+    Node.stop(pid)
   end
 end
