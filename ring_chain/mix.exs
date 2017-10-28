@@ -23,7 +23,9 @@ defmodule RingChain.Mixfile do
     shared_deps() ++ []
   end
   defp deps(:dev) do
-    shared_deps() ++ []
+    shared_deps() ++ [
+      {:ex_doc, "~> 0.16", runtime: false}
+    ]
   end
   defp shared_deps do
     [
